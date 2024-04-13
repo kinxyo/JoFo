@@ -9,5 +9,9 @@ export default defineNuxtConfig({
       wasm: true
     }
   },
-  ssr: true
+  ssr: true,
+  router: {
+    base: '/kinxyo.github.io/',
+  },
+
 })
