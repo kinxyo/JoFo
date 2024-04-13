@@ -9,5 +9,5 @@
 ## Generate the `WASM` file
 
 ```bash
-wasm-pack build --target web
+wasm-pack build --target web --out-dir ./path/to/output
 ```

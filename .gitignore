@@ -28,3 +28,6 @@ logs
 
 #For WASM
 /pkg
+
+#...
+store.MD
