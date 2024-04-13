@@ -22,16 +22,16 @@ concurrency:
 jobs:
   wasm:
     runs-on: ubuntu-latest
-      steps:
-        - name: Checkout
-          uses: actions/checkout@v4
-        - name: Install wasm-pack
-        # USING CARRGOOO!!???
-          run: cargo install wasm-pack
-        - name: Set target
-          run: rustup target add wasm32-unknown-unknown
-        - name: Build wasmfile
-          run: wasm-pack build --target web
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install wasm-pack
+      # USING CARRGOOO!!???
+        run: cargo install wasm-pack
+      - name: Set target
+        run: rustup target add wasm32-unknown-unknown
+      - name: Build wasmfile
+        run: wasm-pack build --target web
 
   build:
     runs-on: ubuntu-latest
