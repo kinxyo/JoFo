@@ -11,7 +11,7 @@ export default defineNuxtConfig({
   },
   ssr: true,
   router: {
-    base: '/kinxyo.github.io/',
+    base: '/notes/',
   },
 
 })
