@@ -19,8 +19,7 @@ concurrency:
   group: "pages"
   cancel-in-progress: false  # Don't touch this
 
-jobs:
-  wasm:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -32,12 +31,6 @@ jobs:
         run: rustup target add wasm32-unknown-unknown
       - name: Build wasmfile
         run: wasm-pack build --target web
-
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
       - name: Detect package manager
         id: detect-package-manager
         run: |
