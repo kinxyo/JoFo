@@ -1,19 +1,6 @@
-<script setup lang="ts">
-</script>
+<script setup>
 
-
-<template><h1>Hey</h1></template>
-
-
-<style>
-</style>
-
-<!-- <script setup>
-
-console.log("sign");
-
-import init, { greets, add } from "~/wasm-pkg/wasmfile.js"
-// import "~/assets/scripts/script.js"
+import init, { greets, add } from "~/assets/module/wasmfile.js"
 
 const greeting = ref("");
 const input1 = ref(0);
@@ -50,4 +37,4 @@ function using_rust_add(a, b) {
 		</div>
 		
 	</main>
-</template> -->
+</template>

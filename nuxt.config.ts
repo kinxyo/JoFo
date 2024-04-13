@@ -10,6 +10,7 @@ export default defineNuxtConfig({
     }
   },
   ssr: true,
+  target: static,
   router: {
     base: '/notes/',
   },
