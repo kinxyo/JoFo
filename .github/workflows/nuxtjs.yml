@@ -1,3 +1,14 @@
+
+
+
+
+
+jobs:
+  build:
+
+    
+
+
 name: Deploy Nuxt site to Pages
 
 on:
@@ -6,6 +17,9 @@ on:
     paths-ignore: '**.md'
 
   workflow_dispatch:
+
+env:
+  CARGO_TERM_COLOR: always
 
 permissions:
   contents: read
@@ -58,6 +72,17 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./dist
+
+  wasm:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Install wasm-pack
+      run: cargo install wasm-pack
+    - name: Set target
+      run: rustup target add wasm32-unknown-unknown
+    - name: Build wasmfile
+      run: wasm-pack build --target web
 
   deploy:
     environment:
