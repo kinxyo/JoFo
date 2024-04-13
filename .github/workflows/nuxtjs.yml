@@ -66,9 +66,9 @@ jobs:
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
       - name: Static HTML export with Nuxt
-        run: ${{ steps.detect-package-manager.outputs.manager }} run generate
-      - name: No Jekyll theme
-        run: touch ./dist/.nojekyll
+        run: ${{ steps.detect-package-manager.outputs.manager }} generate
+      - name: SEE OUTPUT DIR
+        run: ls ./dist
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
