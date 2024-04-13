@@ -1,4 +1,14 @@
-<script setup>
+<script setup lang="ts">
+</script>
+
+
+<template><h1>Hey</h1></template>
+
+
+<style>
+</style>
+
+<!-- <script setup>
 
 console.log("sign");
 
@@ -40,4 +50,4 @@ function using_rust_add(a, b) {
 		</div>
 		
 	</main>
-</template>
+</template> -->
