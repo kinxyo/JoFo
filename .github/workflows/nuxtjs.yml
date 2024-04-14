@@ -35,7 +35,6 @@ jobs:
         run: wasm-pack build --target web
       - name: Adding `package-lock.json`
         run: npm init
-        run: wasm-pack build --target web
       - name: Detect package manager
         id: detect-package-manager
         run: |
