@@ -32,6 +32,7 @@ jobs:
       - name: Set target
         run: rustup target add wasm32-unknown-unknown
       - name: Build wasmfile
+        run: wasm-pack build --target web
       - name: Adding `package-lock.json`
         run: npm init
         run: wasm-pack build --target web
