@@ -6,6 +6,9 @@
 
 <template>
 	<main>
+
+		<h1>test app</h1>
+
 		<ClientOnly>
 			<h1>{{ greeting }}</h1>
 			<div class="loading"></div>
