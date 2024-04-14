@@ -32,7 +32,7 @@ jobs:
       - name: Set target
         run: rustup target add wasm32-unknown-unknown
       - name: Build wasmfile
-        run: wasm-pack build --target web --out-dir ./assets/module
+        run: wasm-pack build --target web
       - name: Detect package manager
         id: detect-package-manager
         run: |
