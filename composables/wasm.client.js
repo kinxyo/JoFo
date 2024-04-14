@@ -8,8 +8,6 @@ export default function useWasm() {
 
   onMounted(() => {
     if (process.client) {        
-        alert("client side running")
-        console.log("Running client side, ", process.client);
         init().then(() => {
             greeting.value = greets();
         });  
@@ -17,7 +15,6 @@ export default function useWasm() {
   });
 
   function using_rust_add(a, b) {
-    console.log("`add` button working");
     result.value = add(a, b)
   }
 

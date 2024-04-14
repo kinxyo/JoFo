@@ -31,9 +31,3 @@ logs
 
 #...
 store.MD
-
-#package manager
-bun.lockb
-yarn.lock
-package-lock.json
-pnpm-lock.json
