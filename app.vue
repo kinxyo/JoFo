@@ -1,40 +1,22 @@
 <script setup>
+	import useWasm from "~/composables/wasm.client.js";
 
-import init, { greets, add } from "~/assets/module/wasmfile.js"
-
-const greeting = ref("");
-const input1 = ref(0);
-const input2 = ref(0);
-const result = ref(0);
-
-onBeforeMount(() => {
-	console.log("working on initializing WASM...");
-	init().then(() => {
-		console.log("WASM initialized!");
-		greeting.value = greets();
-	});	
-	
-});
-
-function using_rust_add(a, b) {
-	console.log("`add` button working");
-	result.value = add(a, b)
-}
-
+	const { greeting, input1, input2, result, using_rust_add } = useWasm();
 </script>
 
 <template>
 	<main>
-		<h1>{{ greeting }}</h1>
-		<div class="loading"></div>
+		<ClientOnly>
+			<h1>{{ greeting }}</h1>
+			<div class="loading"></div>
 
-		<div class="set">
-			<h1 v-if="!result">add 2 numbers</h1>
-			<h1 v-else>{{ result }}</h1>
-			<input type="number" v-model="input1"/>
-			<input type="number" v-model="input2"/>
-			<button @click="using_rust_add(input1, input2)"> ADD </button>
-		</div>
-		
+			<div class="set">
+				<h1 v-if="!result">add 2 numbers 🧮</h1>
+				<h1 v-else>{{ result }}</h1>
+				<input type="number" v-model="input1" />
+				<input type="number" v-model="input2" />
+				<button @click="using_rust_add(input1, input2)">ADD</button>
+			</div>
+		</ClientOnly>
 	</main>
 </template>
