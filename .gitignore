@@ -27,3 +27,5 @@ logs
 # Added by cargo
 
 /target
+
+docs/
