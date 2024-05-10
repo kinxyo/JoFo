@@ -1,3 +1,5 @@
+use std::fs::File;
+
 use wasm_bindgen::prelude::wasm_bindgen;
 
 #[wasm_bindgen]
@@ -8,4 +10,8 @@ pub fn greets() -> String {
 #[wasm_bindgen]
 pub fn add(a: i32, b: i32) -> i32 {
     a + b
+}
+
+pub fn filefind(path:&str) -> File {
+
 }
