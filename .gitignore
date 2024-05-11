@@ -25,6 +25,7 @@ logs
 
 # Added by cargo
 /target
+parser/target
 
 #For WASM
 /pkg

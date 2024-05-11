@@ -1,12 +1,12 @@
 [package]
-name = "notes"
+name = "parser"
 version = "0.0.1"
 edition = "2021"
 
 [lib]
 crate-type = ["cdylib"]
 name = "wasmfile"
-path = "src-rust/lib.rs"
+path = "parser/lib.rs"
 
 [dependencies]
 wasm-bindgen = "0.2.74"

@@ -58,7 +58,7 @@ impl SymbolTable {
         symbols
     }
 
-    /* pub fn lookup(&self, syntax: &char) -> bool {
+    /* pub fn lookup(&self, syntax: &car) -> bool {
 
         let s = syntax.to_string();
         self.symbols.contains_key(&s)
@@ -110,4 +110,6 @@ pub fn parse(content: String) -> Vec<Token> {
 
 // HELPER FUNCTIONS
 
-fn collect_text(symbol: SymbolType) {}
+fn collect_text(symbol: SymbolType) {
+    // function for collecting all strings here!
+}
