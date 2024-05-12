@@ -17,9 +17,10 @@ enum SymbolType {
 
 use std::collections::HashMap;
 
+use serde::Serialize;
+
 pub struct SymbolTable {
     symbols: HashMap<String, SymbolType>, // Key = syntax (formatting) | Value = symbol type
-                                          // maybe will add more fields
 }
 
 impl SymbolTable {
@@ -58,13 +59,6 @@ impl SymbolTable {
         symbols
     }
 
-    /* pub fn lookup(&self, syntax: &car) -> bool {
-
-        let s = syntax.to_string();
-        self.symbols.contains_key(&s)
-
-    } */
-
     pub fn lookup(&self, syntax: &char) -> Option<String> {
         let s = syntax.to_string();
         match self.symbols.get(&s) {
@@ -83,33 +77,53 @@ impl SymbolTable {
     }
 }
 
-#[derive(Debug, PartialEq, Clone)]
+#[derive(Debug, PartialEq, Clone, Serialize)]
 pub struct Token {
     pub text: String,
     pub symbol_type: String,
 }
 
-pub fn parse(content: String) -> Vec<Token> {
+pub fn basic_parser<'a>(content: String) -> Vec<Token> {
     let table: SymbolTable = SymbolTable::init();
-    let mut tokens: Vec<Token> = Vec::new();
-    let mut text: String = String::new();
-    let mut track_text: Vec<String> = Vec::new();
-    let mut inside: bool = false;
-    let mut track_symbol: Vec<char> = Vec::new(); //stack
+    let mut inside_symbol: bool = false;
+    let mut string = String::new();
+    let mut result: Vec<Token> = Vec::new();
 
-    /*
+    for char in content.chars() {
+        
+        match inside_symbol {
+            false => {
 
-    Approach:
-        func: collect all text until you find the same symbol again. (input: symbol)
-              + ignore any other symbol.
-        main: iterate over chars, find symbol? -> call func | find nested symbol? -> call func.
-    */
+                match table.lookup(&char) {
+                    None => continue,
+                    Some(_) => {
+                        inside_symbol = true;
+                    }
+                }
+            },
+            
+            true => {
+                match table.lookup(&char) {
+                    None => {
+                        string.push(char);
+                    },
+                    Some(x) => {
+                        result.push(Token { text: string.clone(), symbol_type: x });
+                        inside_symbol = false;
+                        string.clear();
+                    }
+                }
+                
 
-    tokens
-}
 
-// HELPER FUNCTIONS
+            }
 
-fn collect_text(symbol: SymbolType) {
-    // function for collecting all strings here!
+        }
+        
+        
+
+
+    }
+    result
+    // content.lines().filter(|x| x.contains(&table.lookup(x).unwrap_or_default())).collect()
 }

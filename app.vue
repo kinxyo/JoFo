@@ -1,25 +1,74 @@
 <script setup>
-	import useWasm from "~/composables/wasm.client.js";
 
-	const { greeting, input1, input2, result, using_rust_add } = useWasm();
+import init, { greet, formatter } from "~/WASM/wasmfile.js";
+
+const greetings = ref("");
+const txt = ref("");
+
+onBeforeMount(() => {
+	init().then(() => {
+		greetings.value = greet();
+	});
+});
+
+watchEffect(() => {
+	// console.log(txt.value);
+	let data = 	formatter(txt.value);
+	console.log(data);
+})
+
 </script>
 
 <template>
-	<main>
-
-		<h1 style="color: grey">test app</h1>
+	<main class="app">
 
 		<ClientOnly>
-			<h1>{{ greeting }}</h1>
-			<div class="loading"></div>
-
-			<div class="set">
-				<h1 v-if="!result">add 2 numbers 🧮</h1>
-				<h1 v-else>{{ result }}</h1>
-				<input type="number" v-model="input1" />
-				<input type="number" v-model="input2" />
-				<button @click="using_rust_add(input1, input2)">ADD</button>
-			</div>
+			<header> {{ greetings }} </header>
+			<textarea v-model="txt">	
+			</textarea>
 		</ClientOnly>
+
 	</main>
 </template>
+
+<style scoped>
+.app {
+	height: 100vh;
+	width: 100vw;
+}
+
+header {
+	display: flex;
+	justify-content: space-between;
+	padding-inline: 2rem;
+	padding-block: 1rem;
+
+	background-color: var(--ui);
+	border-bottom-right-radius: 1rem;
+	border-bottom-left-radius: 1rem;
+}
+
+
+textarea {
+	margin-top: .2rem;
+	background-color: var(--ui);
+	color: var(--silver);
+	
+	border: none;
+	border-top-right-radius: 1rem;
+	border-top-left-radius: 1rem;
+
+	height: 100vh;
+	width: 100vw;
+
+	font-family: system-ui;
+	font-size: 12.5px;
+
+	padding: 1rem;
+}
+
+textarea:focus {
+	outline: none;
+}
+
+</style>

@@ -28,7 +28,7 @@ logs
 parser/target
 
 #For WASM
-/pkg
+/WASM
 
 #...
 store.MD
