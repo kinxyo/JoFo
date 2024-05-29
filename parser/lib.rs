@@ -16,16 +16,17 @@ pub fn greet() -> String {
     String::from("JoFo")
 }
 
-
 #[wasm_bindgen]
 pub fn formatter(content: String) -> String {
     match serde_json::to_string(&basic_parser(content)) {
         Ok(x) => x,
         Err(e) => {
-            let err = format!("Problem with `formatter`: {}",e);
+            let err = format!("Problem with `formatter`: {}", e);
             String::from(err)
         }
     }
+    // println!("{:#?}", content);
+    // String::from("hey")
 }
 
 #[cfg(test)]
@@ -50,8 +51,7 @@ mod tests {
         ];
         assert_eq!(test_case, basic_parser(content));
     }
-    
-    
+
     #[test]
     fn formatter_working() {
         let content = std::fs::read_to_string("parser/test.kinx").expect("unable to open file");
@@ -62,6 +62,6 @@ mod tests {
 
         println!("{:#?}", result);
 
-            assert_eq!(test_case, String::from("value"));
+        assert_eq!(test_case, String::from("value"));
     }
 }
