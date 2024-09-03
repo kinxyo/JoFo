@@ -4,7 +4,7 @@ use core::basic_parser;
 
 // WASM
 
-use wasm_bindgen::prelude::wasm_bindgen;
+use wasm_bindgen::{prelude::wasm_bindgen, JsValue};
 
 // #[wasm_bindgen]
 // pub fn maybe() -> String {
@@ -17,14 +17,17 @@ pub fn greet() -> String {
 }
 
 #[wasm_bindgen]
-pub fn formatter(content: String) -> String {
-    match serde_json::to_string(&basic_parser(content)) {
+pub fn formatter(content: String) -> JsValue {
+    let parsed = basic_parser(content);
+    serde_wasm_bindgen::to_value(&parsed).map_err(|e| e.into())
+
+    /* match serde_json::to_string(&basic_parser(content)) {
         Ok(x) => x,
         Err(e) => {
             let err = format!("Problem with `formatter`: {}", e);
             String::from(err)
         }
-    }
+    } */
     // println!("{:#?}", content);
     // String::from("hey")
 }

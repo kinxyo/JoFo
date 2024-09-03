@@ -1,8 +1,8 @@
 <script setup lang="ts">
 	import init, { greet, formatter } from "~/WASM/wasmfile.js";
 
-	const greetings = ref("");
-	const txt = ref("");
+	const greetings: Ref<string> = ref("");
+	const txt: Ref<string> = ref("");
 
 	onBeforeMount(() => {
 		init().then(() => {
@@ -13,10 +13,24 @@
 
 	async function startLiveEditing() {
 		watchEffect(() => {
-      let data = formatter(txt.value);
+      let data: string = formatter(txt.value);
       console.log(data);
 		});
 	}
+
+  const formattedText = computed(() => {
+  let data: string = formatter(txt.value);
+  return data.map(token => {
+    switch (token.symbol_type) {
+      case 'sidenote':
+        return `<span class="sidenote">${token.text}</span>`;
+      case 'emphasize':
+        return `<span class="emphasize">${token.text}</span>`;
+      default:
+        return token.text;
+    }
+  }).join('');
+});
 </script>
 
 <template>
@@ -24,6 +38,7 @@
 		<ClientOnly>
 			<header>{{ greetings }}</header>
 			<textarea v-model="txt"> </textarea>
+      <div v-html="formattedText"></div>
 		</ClientOnly>
 	</main>
 </template>
